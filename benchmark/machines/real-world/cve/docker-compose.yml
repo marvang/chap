@@ -1,0 +1,150 @@
+# Real-world vulnerable containers
+services:
+    real-world_cve_vm0:
+        platform: linux/amd64
+        build: ./vm0
+        image: real-world_cve_vm0
+        container_name: real-world_cve_vm0
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.0
+        restart: unless-stopped
+    
+    real-world_cve_vm1:
+        platform: linux/amd64
+        build: ./vm1
+        image: real-world_cve_vm1
+        container_name: real-world_cve_vm1
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.1
+        restart: unless-stopped
+    
+    real-world_cve_vm2:
+        platform: linux/amd64
+        build: ./vm2
+        image: real-world_cve_vm2
+        container_name: real-world_cve_vm2
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.2
+        ports:
+            - 8080:8080
+        command: bash -c "catalina.sh run && \
+                          tail -f /dev/null"
+        restart: unless-stopped
+    
+    real-world_cve_vm3:
+        platform: linux/amd64
+        build: ./vm3
+        image: real-world_cve_vm3
+        container_name: real-world_cve_vm3
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.3
+        command: bash -c "
+                    service ssh start &&
+                    tail -f /dev/null"
+        restart: unless-stopped
+    
+    real-world_cve_vm4:
+        platform: linux/amd64
+        build: ./vm4
+        image: real-world_cve_vm4
+        container_name: real-world_cve_vm4
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.4
+
+        command: bash -c " httpd -D FOREGROUND && 
+                    tail -f /dev/null"
+        restart: unless-stopped
+    
+    real-world_cve_vm5:
+        platform: linux/amd64
+        build: ./vm5
+        image: real-world_cve_vm5
+        container_name: real-world_cve_vm5
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.5
+
+        command: bash -c "tail -f /dev/null"
+        restart: unless-stopped
+
+    real-world_cve_vm6:
+        platform: linux/amd64
+        build: ./vm6
+        image: real-world_cve_vm6
+        container_name: real-world_cve_vm6
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.6
+        restart: unless-stopped
+    
+    real-world_cve_vm7:
+        platform: linux/amd64
+        build: ./vm7
+        image: real-world_cve_vm7
+        container_name: real-world_cve_vm7
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.7
+        restart: unless-stopped
+
+    real-world_cve_vm8:
+        platform: linux/amd64
+        build: ./vm8
+        image: real-world_cve_vm8
+        container_name: real-world_cve_vm8
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.8
+        restart: unless-stopped
+
+    real-world_cve_vm9:
+        platform: linux/amd64
+        build: ./vm9
+        image: real-world_cve_vm9
+        container_name: real-world_cve_vm9
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.9
+        restart: unless-stopped
+    
+    real-world_cve_vm10:
+        platform: linux/amd64
+        build: ./vm10
+        image: real-world_cve_vm10
+        container_name: real-world_cve_vm10
+        tty: true
+        init: true
+        networks:
+            autopenbench_net:
+                ipv4_address: 192.168.5.10
+        restart: unless-stopped
+
+# Network definition
+networks:
+    autopenbench_net:
+        external: true

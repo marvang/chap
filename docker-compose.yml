@@ -1,0 +1,36 @@
+services:
+  ctf-agent-demo-kali:
+    image: ctf-agent-demo-kali
+    container_name: ctf-agent-demo-kali
+    networks:
+      autopenbench_net:
+        ipv4_address: 192.168.0.5
+    working_dir: /ctf-workspace
+    tty: true
+    stdin_open: true
+    privileged: false  
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - NET_BIND_SERVICE
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    device_cgroup_rules:
+      - 'c 10:200 rwm'   # /dev/net/tun
+    # security_opt:
+      # - no-new-privileges:true
+    volumes:
+      - ./ctf-workspace:/ctf-workspace
+    # env_file: # Optional if we want to load environment variables inside the container
+    #   - .env
+
+networks:
+  autopenbench_net:
+    external: true
+
