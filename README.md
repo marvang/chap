@@ -2,21 +2,6 @@
 
 This repo contains a research framework for agentic penetration testing. CHAP addresses context window limits in long-running autonomous security assessments through a relay mechanism that hands off compressed states to fresh agent instances.
 
-📄 **[Read the paper](https://dx.doi.org/10.14722/last-x.2026.23xxx)**
-
-If you use this work in your research, please cite:
-
-```bibtex
-@inproceedings{chap2026,
-  title={Context Relay for Long-Running Penetration-Testing Agents}, 
-  author={Vangeli, Marius and Brynielsson, Joel and Cohen, Mika and Kamrani, Farzad},
-  booktitle={NDSS Workshop on LLM Assisted Security and Trust Exploration (LAST-X)},
-  year={2026},
-  url={https://dx.doi.org/10.14722/last-x.2026.23xxx},
-  doi={10.14722/last-x.2026.23xxx}
-}
-```
-
 ## Overview
 
 - **Agentic Framework** — LLM agents execute commands in a Kali Linux environment
