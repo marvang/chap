@@ -13,11 +13,9 @@ from src.llm_utils.openrouter import call_openrouter_with_history
 from src.llm_utils.prompt_builder import build_initial_messages
 from src.llm_utils import prompts
 from src.utils.state_manager import (
-    update_token_state,
     create_session,
     update_session_tokens,
     add_session_command,
-    save_session,
 )
 from src.utils.workspace import cleanup_workspace
 from src.utils.docker_exec import execute_command, cleanup_tmux_session, get_container_ips
@@ -279,7 +277,6 @@ def run_experiment_agent(
         token_usage_percentage = 0.0
 
         if usage:
-            update_token_state(usage, model_name)
             update_session_tokens(session, usage)
 
             # Calculate token metrics for CHAP (used for status display and auto-trigger)
@@ -529,7 +526,6 @@ def run_experiment_agent(
 
     # End of loop - finalize session
     session["metrics"]["total_time"] = time.time() - session_start_time
-    save_session(session)
 
     # Clean up tmux session
     cleanup_tmux_session(container)

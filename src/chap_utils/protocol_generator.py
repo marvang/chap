@@ -7,7 +7,7 @@ from typing import Dict, Any, List
 from datetime import datetime
 from src.llm_utils.openrouter import call_openrouter_protocol
 from src.llm_utils.prompt_builder import format_relay_protocols
-from src.utils.state_manager import update_session_tokens, update_token_state
+from src.utils.state_manager import update_session_tokens
 
 PROTOCOL_GENERATOR_SYSTEM_PROMPT = """ You are a penetration testing agent specializing in generating concise relay protocols for handoff to workers in a shift‑relay pentesting architecture. Each agent picks up where the last left off, so your protocol must comprehensively summarize all prior actions, findings, and context in a compact format, while avoiding redundancy with earlier protocols. Your protocol will be appended together with all prior protocols to the initial prompt for the next agent in the relay.
 Generate a concise and brief relay protocol in markdown for the next penetration testing agent to let them quickly understand what has been done so far and pick up where you left off.
@@ -95,7 +95,6 @@ def generate_relay_protocol(messages: List[Dict[str, str]], session: Dict[str, A
 
         # Track costs and token usage for protocol generation
         if usage:
-            update_token_state(usage, model_name)
             update_session_tokens(session, usage)
 
         # Use the protocol content from structured response

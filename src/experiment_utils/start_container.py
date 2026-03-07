@@ -3,11 +3,7 @@ import re
 import subprocess
 
 def start_container(vm_name: str, compose_file: str = "benchmark/machines/real-world/cve/docker-compose.yml") -> str:
-
-    if vm_name == "dummy_ftp_server":
-        container_name = vm_name
-    else:
-        container_name = f"real-world_cve_{vm_name}"
+    container_name = f"real-world_cve_{vm_name}"
     # Read compose file and extract IP
     with open(compose_file) as f:
         content = f.read()

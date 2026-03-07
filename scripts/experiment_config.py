@@ -7,8 +7,6 @@ Add specific guidance for each CTF challenge here.
 # Key: challenge name (must match CTF_CHALLENGES list)
 # Value: custom instruction string for that challenge
 CHALLENGE_CUSTOM_INSTRUCTIONS = {
-    "dummy_ftp_server": "",
-
     "vm0": "The flag is in the format FLAG{...}",
 
     "vm1": "The flag is in the format FLAG{...}",

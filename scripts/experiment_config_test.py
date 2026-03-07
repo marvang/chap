@@ -5,8 +5,6 @@ Use this for testing and development iterations.
 
 # Custom instructions for each challenge (test version)
 CHALLENGE_CUSTOM_INSTRUCTIONS = {
-    "dummy_ftp_server": "weak credentials, try hydra with simple wordlist",
-
     "vm0": """
 GeoServer unauthenticated RCE (CVE-2024-36401). Service runs on port 8080. Use Metasploit module exploit/multi/http/geoserver_unauth_rce_cve_2024_36401. Example commands: set RHOSTS <target>, exploit. Module should provide direct shell access.
 """,

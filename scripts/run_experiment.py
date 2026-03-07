@@ -55,7 +55,6 @@ if TEST_RUN:
 else:
     from scripts.experiment_config import CHALLENGE_CUSTOM_INSTRUCTIONS, DEFAULT_CUSTOM_INSTRUCTIONS
 
-DUMMY_FTP_SERVER_FLAG = "1234567890" # legacy support for dummy_ftp_server challenge, removed for publication, too lazy to remove all references
 CTF_FLAG_PATH = "benchmark/machines/real-world/cve"
 # Challenges to test (all VMs enabled for overnight runs)
 CTF_CHALLENGES = [
@@ -75,7 +74,7 @@ CTF_CHALLENGES = [
 # ============================================================================
 # DEFAULT VALUES (can be overridden via CLI)
 # ============================================================================
-MODEL_NAME = "xiaomi/mimo-v2-flash:free"
+MODEL_NAME = "openai/gpt-5.1-codex-mini"
 CHAP_ENABLED = False
 MAX_ITERATIONS = 220
 COMMAND_TIMEOUT = 200
@@ -95,11 +94,11 @@ DISCORD_NOTIFICATIONS_ENABLED = True # Set to False, to enable you need to set D
 # Architecture-specific prompt: False = macOS/aarch64 (Kali emulates targets), True = Ubuntu/amd64 (native execution)
 USE_AMD64_PROMPT = False
 
-KALI_CONTAINER_NAME = "ctf-agent-demo-kali"
+KALI_CONTAINER_NAME = "ctf-agent-kali"
 SERVICE_STARTUP_DELAY = 30
 
 RESULTS_DIR = "./results"
-EXPERIMENT_SET_NAME = "xiamoi-mimo-v2-flash"
+EXPERIMENT_SET_NAME = "default"
 
 
 # ============================================================================
@@ -196,12 +195,10 @@ def save_results(results: list, results_dir: str, experiment_dir: str | None = N
             challenge: get_custom_instructions_for_challenge(challenge)
             for challenge in CTF_CHALLENGES
         }
-
     experiment_metadata = {
         "timestamp": timestamp,
         "git_commit_hash": get_git_commit_hash(),
         "ctf_flag_path": CTF_FLAG_PATH,
-        "dummy_ftp_server_flag": DUMMY_FTP_SERVER_FLAG,
         "ctf_challenges": CTF_CHALLENGES,
         "model": MODEL_NAME,
         "chap_enabled": CHAP_ENABLED,
@@ -389,9 +386,7 @@ def main():
                     raise Exception("Failed to start Kali container")
 
                 # Get expected flags
-                if challenge == "dummy_ftp_server":
-                    expected_flags = [DUMMY_FTP_SERVER_FLAG]
-                elif challenge == "vm10":
+                if challenge == "vm10":
                     # Special case for vm10: Read entire file as single flag (RSA private key)
                     flag_file_path = os.path.join(CTF_FLAG_PATH, challenge, "flag.txt")
                     try:

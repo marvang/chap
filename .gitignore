@@ -8,6 +8,4 @@ wheels/
 .DS_Store
 .uv/
 .venv
-ctf-workspace/vpn.log
 ctf-workspace/flags.txt
-ctf-logs/

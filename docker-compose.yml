@@ -1,7 +1,7 @@
 services:
-  ctf-agent-demo-kali:
-    image: ctf-agent-demo-kali
-    container_name: ctf-agent-demo-kali
+  ctf-agent-kali:
+    image: ctf-agent-kali
+    container_name: ctf-agent-kali
     networks:
       autopenbench_net:
         ipv4_address: 192.168.0.5

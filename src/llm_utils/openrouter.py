@@ -9,7 +9,7 @@ from urllib import request
 from urllib.error import HTTPError, URLError
 from dotenv import load_dotenv
 from src.llm_utils.response_schema import get_ctf_response_schema
-from src.utils.state_manager import log_llm_call
+
 
 
 def call_openrouter_with_history(messages: list, model_name: str) -> Tuple[str, str, Dict[str, Any], str]:
@@ -330,22 +330,6 @@ def call_openrouter_protocol(messages: list, model_name: str) -> Tuple[str, str,
 
     # Extract usage information
     usage = data.get("usage", {})
-
-    # Calculate duration
-    duration = time.time() - start_time
-
-    # Log the call details
-    try:
-        log_llm_call(
-            call_type="protocol_generation_structured",
-            model=model_name,
-            messages=messages,
-            response_content=content,
-            usage=usage,
-            duration_seconds=duration
-        )
-    except Exception as e:
-        print(f"⚠️  Warning: Failed to log LLM call: {e}")
 
     return reasoning, protocol, usage
 
